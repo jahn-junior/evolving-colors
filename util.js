@@ -1,5 +1,8 @@
 /** Global Parameters Object */
-const params = { };
+const PARAMS = {
+  dimension: 100,
+  size: 10
+};
 
 /**
  * @param {Number} n
