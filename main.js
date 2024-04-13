@@ -9,8 +9,22 @@ ASSET_MANAGER.downloadAll(() => {
   let creator = new Creator(gameEngine)
   gameEngine.addEntity(creator);
 
-  document.getElementById("addplant").onclick = e => {creator.addPlant()}
-  document.getElementById("addanimat").onclick = e => {creator.addAnimat()}
+  document.getElementById("addplant").onclick = e => {
+    creator.addPlant(
+      randomInt(PARAMS.dimension),
+      randomInt(PARAMS.dimension),
+      randomInt(360)
+    )
+  }
+
+  document.getElementById("addanimat").onclick = e => {
+    creator.addAnimat(
+      randomInt(PARAMS.dimension),
+      randomInt(PARAMS.dimension),
+      randomInt(360),
+      1
+    )
+  }
 
 	gameEngine.init(ctx);
 	gameEngine.start();

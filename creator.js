@@ -3,36 +3,38 @@ class Creator {
   constructor(game) {
     Object.assign(this, {game})
     this.tinyworld = []
+    this.baseSelectivity = 50
     
-    for (let i = 0; i < this.width; i++) {
+    for (let i = 0; i < PARAMS.dimension; i++) {
       this.tinyworld.push([])
-      for (let j = 0; j < this.height; j++) {
-        this.tinyworld[i][j] = new Cell()
+      for (let j = 0; j < PARAMS.dimension; j++) {
+        this.tinyworld[i].push(null)
       }
     }
   
   }
 
   addPlant(x, y, hue) {
-    this.tinyworld[y][x].plant = new Plant(x, y, hue)
+    this.tinyworld[y][x] = new Plant(this, x, y, hue)
   }
 
-  addAnimat(x, y, hue, selectivity) {
-    this.tinyworld[y][x].addAnimat = new Animat(x, y, hue, selectivity)
+  addAnimat(x, y, hue) {
+    this.game.addEntity(new Animat(this, x, y, hue, this.baseSelectivity))
   }
 
   update() {
-    for (let i = 0; i < this.height; i++) {
-      for (let j = 0; j < this.width; j++) {
-        this.tinyworld[i][j].update()
+    for (let i = 0; i < PARAMS.dimension; i++) {
+      for (let j = 0; j < PARAMS.dimension; j++) {
+        if (randomInt(100) == 99) this.tinyworld[i][j] = null
+        if (this.tinyworld[i][j]) this.tinyworld[i][j].update()
       }
     }
   }
 
   draw(ctx) {
-    for (let i = 0; i < this.height; i++) {
-      for (let j = 0; j < this.width; j++) {
-        this.tinyworld[i][j].draw(ctx)
+    for (let i = 0; i < PARAMS.dimension; i++) {
+      for (let j = 0; j < PARAMS.dimension; j++) {
+        if (this.tinyworld[i][j]) this.tinyworld[i][j].draw(ctx)
       }
     }
   }
