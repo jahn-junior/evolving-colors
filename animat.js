@@ -1,7 +1,10 @@
 class Animat {
   constructor(creator, x, y, hue, selectivity) {
     Object.assign(this, {creator, x, y, hue, selectivity})
-    this.energy = 50
+    this.colorVariance = 10
+    this.baseEnergy = 50
+    this.energy = this.baseEnergy
+    this.reproductionRate = 75
   }
 
   hueDifference (plant) {
@@ -16,6 +19,7 @@ class Animat {
     let newY = (PARAMS.dimension + this.y + randomInt(3) - 1) % PARAMS.dimension
     let bestPlant = Number.MAX_SAFE_INTEGER
     
+    // picks closest color match within proximity
     for (let i = -1; i <= 1; i++) {
       for (let j = -1; j <= 1; j++) {
         if (i || j) {
@@ -40,6 +44,10 @@ class Animat {
   }
 
   update() {
+    this.colorVariance = parseInt(document.getElementById("animatvariance").value)
+    this.reproductionRate = parseInt(document.getElementById("birthrate").value)
+
+    // eats plant if within food selectivity range
     if (this.creator.tinyworld[this.y][this.x]) {
       let plant = this.creator.tinyworld[this.y][this.x]
       if (this.hueDifference(plant) < 2 * this.selectivity - 1) {
@@ -50,14 +58,15 @@ class Animat {
       }
     }
 
+    // death condition
     if (randomInt(100) == 99 || this.energy == 0) {
       this.removeFromWorld = true
     }
 
-    let colorVariance = 5
-    if (this.energy > 75) {
-      this.creator.addAnimat(this.x, this.y, (this.hue + randomInt(colorVariance + 1) - 5) % 360)
-      this.energy -= 25
+    // reproduction conditions
+    if (this.energy > this.reproductionRate) {
+      this.creator.addAnimat(this.x, this.y, (this.hue + randomInt(this.colorVariance + 1) - 5) % 360)
+      this.energy -= (this.reproductionRate - this.baseEnergy)
     }
 
     this.move()

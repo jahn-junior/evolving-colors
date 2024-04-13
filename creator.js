@@ -3,7 +3,7 @@ class Creator {
   constructor(game) {
     Object.assign(this, {game})
     this.tinyworld = []
-    this.baseSelectivity = 50
+    this.selectivity = 50
     
     for (let i = 0; i < PARAMS.dimension; i++) {
       this.tinyworld.push([])
@@ -19,7 +19,7 @@ class Creator {
   }
 
   addAnimat(x, y, hue) {
-    this.game.addEntity(new Animat(this, x, y, hue, this.baseSelectivity))
+    this.game.addEntity(new Animat(this, x, y, hue, this.selectivity))
   }
 
   update() {

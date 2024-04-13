@@ -16,9 +16,24 @@
 </head>
 <body>
     <canvas id="gameWorld" width="1000" height="1000" style="background: white; border: 1px solid black" tabindex="0" autofocus></canvas>
+    
     <fieldset style= "width:970px">
         <input type="button" id="addplant" value="Add Plant">
         <input type="button" id="addanimat" value="Add Animat">
+    </fieldset>
+
+    <br>
+    <fieldset style="width:970px">
+        <label for="range">Plant Color Variance</label>
+        <input type="range" id="plantvariance" min="0" max="40" value="20" step="1">
+
+        &emsp;
+        <label for="range">Animat Color Variance</label>
+        <input type="range" id="animatvariance" min="0" max="20" value="10" step="1">
+
+        &emsp;
+        <label for="range">Animat Birth Rate</label>
+        <input type="range" id="birthrate" min="55" max="115" value="75" step="1">
     </fieldset>
 </body>
 </html>
