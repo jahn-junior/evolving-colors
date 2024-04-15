@@ -3,7 +3,7 @@ class Creator {
   constructor(game) {
     Object.assign(this, {game})
     this.tinyworld = []
-    this.selectivity = 50
+    this.selectivity = 20
     
     for (let i = 0; i < PARAMS.dimension; i++) {
       this.tinyworld.push([])

@@ -46,6 +46,8 @@ class Animat {
   update() {
     this.colorVariance = parseInt(document.getElementById("animatvariance").value)
     this.reproductionRate = parseInt(document.getElementById("birthrate").value)
+    this.selectivity = parseInt(document.getElementById("selectivity").value)
+    console.log(this.selectivity)
 
     // eats plant if within food selectivity range
     if (this.creator.tinyworld[this.y][this.x]) {
